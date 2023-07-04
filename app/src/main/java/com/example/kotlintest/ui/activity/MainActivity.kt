@@ -1,15 +1,14 @@
-package com.example.kotlintest
+package com.example.kotlintest.ui.activity
 
 import androidx.lifecycle.ViewModelProvider
+import com.example.kotlintest.R
 import com.example.kotlintest.base.BaseActivity
 import com.example.kotlintest.databinding.ActivityMainBinding
 import com.example.kotlintest.extension.loadImg
-import com.example.kotlintest.extension.toGone
 import com.example.kotlintest.network.model.CustomList
 import com.example.kotlintest.network.model.RetrofitModel
 import com.example.kotlintest.network.retrofit.ApiManager
 import com.example.kotlintest.util.GLog
-import com.example.kotlintest.util.Util
 import com.example.kotlintest.viewmodel.RetrofitViewModel
 import retrofit2.Call
 import retrofit2.Callback
