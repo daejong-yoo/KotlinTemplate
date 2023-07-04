@@ -13,20 +13,9 @@ package com.example.kotlintest.databinding
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import com.bumptech.glide.Glide
 import com.example.kotlintest.extension.loadImg
 
 object DataBindingAdapter {
-//    @JvmStatic
-//    @BindingAdapter("imageUrl")
-//    fun loadImage(imageView: ImageView?, imageUrl: String?) {
-//        if (imageView != null) {
-//            Glide.with(imageView)
-//                .load(imageUrl)
-//                .into(imageView)
-//        }
-//    }
-
     @JvmStatic
     @BindingAdapter("imageUrl")
     fun loadImage(iv: ImageView, url: String?) = url?.let {
