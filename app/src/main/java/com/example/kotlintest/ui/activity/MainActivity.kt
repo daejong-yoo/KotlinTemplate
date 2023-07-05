@@ -6,18 +6,18 @@ import com.example.kotlintest.R
 import com.example.kotlintest.base.BaseActivity
 import com.example.kotlintest.common.Constant
 import com.example.kotlintest.databinding.ActivityMainBinding
-import com.example.kotlintest.extension.loadImg
+import com.example.kotlintest.extension.setOnSingleClickListener
 import com.example.kotlintest.network.model.CustomList
 import com.example.kotlintest.network.model.RetrofitModel
 import com.example.kotlintest.network.retrofit.ApiManager
 import com.example.kotlintest.util.GLog
-import com.example.kotlintest.viewmodel.RetrofitViewModel
+import com.example.kotlintest.viewmodel.CustomListViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
-    private lateinit var viewModel: RetrofitViewModel
+    private lateinit var customListViewModel: CustomListViewModel
 
     override fun init() {
         initView()
@@ -25,38 +25,33 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun initView() {
-        binding.btnToFragment.setOnClickListener {
+        binding.btnToFragment.setOnSingleClickListener {
             intent = Intent(mActivity, HostFragActivity::class.java)
             startActivity(intent)
+        }
 
-            binding.btnRetrofit.setOnClickListener {
-                requestApi()
-            }
+        binding.btnRetrofit.setOnSingleClickListener {
+            requestApi()
         }
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProvider(this)[RetrofitViewModel::class.java]
-
-        viewModel.list.observe(this) {
-            if (!it.isNullOrEmpty()) {
-                val imgUrl: String? = it[0].imageUrl
-                val mainTitle: String? = it[0].gameTitle
-
-                imgUrl?.let {
-                    binding.imgGame.loadImg(imgUrl)
-                }
-
-                mainTitle?.let {
-                    binding.btnRetrofit.text = mainTitle
-                }
-            }
-        }
+        customListViewModel = ViewModelProvider(this)[CustomListViewModel::class.java]
+        binding.vm = customListViewModel
     }
 
     private fun updateViewModel(list: List<CustomList>?) {
         if (!list.isNullOrEmpty()) {
-            viewModel.updateListItem(list)
+            val gameTitle = list[0].gameTitle
+            val imgUrl = list[0].imageUrl
+
+            gameTitle?.let {
+                customListViewModel.updateGameTitle(it)
+            }
+
+            imgUrl?.let {
+                customListViewModel.updateImgUrl(it)
+            }
         }
     }
 

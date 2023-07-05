@@ -3,6 +3,9 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.example.kotlintest.viewmodel.CustomListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -34,15 +37,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/game_title"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="@{vm.gameTitle}"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_retrofit" />
+
         <ImageView
             android:id="@+id/img_game"
+            imageUrl="@{vm.imageUrl}"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_retrofit"
+            app:layout_constraintTop_toBottomOf="@+id/game_title"
             app:layout_constraintVertical_chainStyle="packed" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
