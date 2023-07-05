@@ -3,13 +3,6 @@
 
     <data>
 
-        <variable
-            name="imageUrl"
-            type="String" />
-
-        <variable
-            name="customList"
-            type="com.example.kotlintest.network.model.CustomList" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -43,7 +36,6 @@
 
         <ImageView
             android:id="@+id/img_game"
-            imageUrl="@{customList.imageUrl}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
