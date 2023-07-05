@@ -7,8 +7,8 @@ import com.example.kotlintest.base.BaseActivity
 import com.example.kotlintest.common.Constant
 import com.example.kotlintest.databinding.ActivityMainBinding
 import com.example.kotlintest.extension.setOnSingleClickListener
-import com.example.kotlintest.network.model.CustomList
-import com.example.kotlintest.network.model.RetrofitModel
+import com.example.kotlintest.network.model.singlePhoto.CustomList
+import com.example.kotlintest.network.model.singlePhoto.SinglePhotoModel
 import com.example.kotlintest.network.retrofit.ApiManager
 import com.example.kotlintest.util.GLog
 import com.example.kotlintest.viewmodel.CustomListViewModel
@@ -56,10 +56,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun requestApi() {
-        ApiManager.getThumbnail()?.enqueue(object : Callback<RetrofitModel> {
-            override fun onResponse(call: Call<RetrofitModel>, response: Response<RetrofitModel>) {
+        ApiManager.requestSinglePhoto().enqueue(object : Callback<SinglePhotoModel> {
+            override fun onResponse(call: Call<SinglePhotoModel>, response: Response<SinglePhotoModel>) {
                 if (response.isSuccessful) {
-                    val model: RetrofitModel? = response.body()
+                    val model: SinglePhotoModel? = response.body()
                     model?.let {
                         val errMsg: String? = model.errMsg
 
@@ -83,7 +83,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 }
             }
 
-            override fun onFailure(call: Call<RetrofitModel>, t: Throwable) {
+            override fun onFailure(call: Call<SinglePhotoModel>, t: Throwable) {
                 GLog.d("onFailure")
             }
         })

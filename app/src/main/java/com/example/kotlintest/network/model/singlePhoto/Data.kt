@@ -1,4 +1,4 @@
-package com.example.kotlintest.network.model
+package com.example.kotlintest.network.model.singlePhoto
 
 class Data {
     var mainTitle: String? = null
