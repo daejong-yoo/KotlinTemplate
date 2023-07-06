@@ -60,19 +60,30 @@ abstract class BaseAdapter<T>(@LayoutRes val layoutId: Int, listener: OnItemClic
 
     fun add(item: T?) {
         item?.let {
-            val idx = _itemList.size
-            _itemList.add(idx, it)
-            notifyItemChanged(idx)
+            val position = _itemList.size
+            _itemList.add(position, it)
+            notifyItemInserted(position)
         }
     }
 
-    fun remove(idx: Int) {
-        _itemList.removeAt(idx)
+    fun remove(position: Int) {
+        if (position < 0)
+            return
+
+        _itemList.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     fun remove(item: T?) {
         item?.let {
+            val position = _itemList.indexOf(it)
+
+            if (position < 0)
+                return
+
             if (_itemList.contains(it)) _itemList.remove(it)
+
+            notifyItemRemoved(position)
         }
     }
 
