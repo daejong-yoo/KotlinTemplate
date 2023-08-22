@@ -9,11 +9,11 @@
 
         <variable
             name="item"
-            type="com.example.kotlintest.network.model.listphoto.ListPhotoModel.CustomList" />
+            type="com.example.kotlintemplate.network.model.listphoto.ListPhotoModel.CustomList" />
 
         <variable
             name="listener"
-            type="com.example.kotlintest.common.OnItemClickListener" />
+            type="com.example.kotlintemplate.common.OnItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/main"
-        android:name="com.example.kotlintest.ui.fragment.FirstFragment"
+        android:name="com.example.kotlintemplate.ui.fragment.FirstFragment"
         tools:layout="@layout/fragment_first">
         <action
             android:id="@+id/action_to_second_fragment"
@@ -24,17 +24,17 @@
 
     <fragment
         android:id="@+id/second"
-        android:name="com.example.kotlintest.ui.fragment.SecondFragment"
+        android:name="com.example.kotlintemplate.ui.fragment.SecondFragment"
         tools:layout="@layout/fragment_second" />
 
     <fragment
         android:id="@+id/third"
-        android:name="com.example.kotlintest.ui.fragment.ThirdFragment"
+        android:name="com.example.kotlintemplate.ui.fragment.ThirdFragment"
         tools:layout="@layout/fragment_third" />
 
     <fragment
         android:id="@+id/list_fragment"
-        android:name="com.example.kotlintest.ui.fragment.ListFragment"
+        android:name="com.example.kotlintemplate.ui.fragment.ListFragment"
         tools:layout="@layout/fragment_list" />
 
 </navigation>

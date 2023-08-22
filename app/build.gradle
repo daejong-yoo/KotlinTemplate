@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.kotlintest'
+    namespace 'com.example.kotlintemplate'
     compileSdk 33
 
     dataBinding {
@@ -14,7 +14,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.kotlintest"
+        applicationId "com.example.kotlintemplate"
         minSdk 23
         targetSdk 33
         versionCode 1
