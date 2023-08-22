@@ -1,8 +1,5 @@
 package com.example.kotlintest.util
 
-import android.content.Context
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
 import android.util.Log
 import com.google.gson.GsonBuilder
 
@@ -17,31 +14,13 @@ class GLog {
         const val isResponseHeaderLog = false
 
         private const val TAG = "ssb10300"
-        private const val MAX_INDEX = 2000
+        private const val MAX_INDEX = 3000
         private const val LOG_DEBUG = 0
         private const val LOG_VERBOSE = 1
         private const val LOG_INFO = 2
         private const val LOG_WARN = 3
         private const val LOG_ERROR = 4
         private val gson = GsonBuilder().setPrettyPrinting().create()
-
-        /**
-         * 현재 디버그모드여부를 리턴
-         *
-         * @param context
-         * @return
-         */
-        fun isDebuggable(context: Context): Boolean {
-            var debuggable = false
-            val pm = context.packageManager
-            try {
-                val appinfo = pm.getApplicationInfo(context.packageName, 0)
-                debuggable = 0 != appinfo.flags and ApplicationInfo.FLAG_DEBUGGABLE
-            } catch (e: PackageManager.NameNotFoundException) {
-                /* debuggable variable will remain false */
-            }
-            return debuggable
-        }
 
         @Synchronized
         fun d(msg: String) {
