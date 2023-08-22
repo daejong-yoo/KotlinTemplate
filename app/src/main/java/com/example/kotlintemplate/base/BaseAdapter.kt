@@ -1,5 +1,7 @@
 package com.example.kotlintemplate.base
 
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
@@ -11,6 +13,7 @@ import com.example.kotlintemplate.common.OnItemClickListener
 import com.example.kotlintemplate.util.GLog
 
 abstract class BaseAdapter<T>(@LayoutRes val layoutId: Int, listener: OnItemClickListener) : RecyclerView.Adapter<BaseAdapter<T>.ViewHolder>() {
+    private val mHandler = Handler(Looper.myLooper()!!)
     private val _itemList: MutableList<T> = mutableListOf()
     private var mListener: OnItemClickListener
 
@@ -45,24 +48,30 @@ abstract class BaseAdapter<T>(@LayoutRes val layoutId: Int, listener: OnItemClic
 
     fun replaceList(itemList: List<T>?) {
         itemList?.let {
-            _itemList.clear()
-            _itemList.addAll(it)
-            notifyDataSetChanged()
+            mHandler.post {
+                _itemList.clear()
+                _itemList.addAll(it)
+                notifyDataSetChanged()
+            }
         }
     }
 
     fun addAll(itemList: List<T>?) {
         itemList?.let {
-            _itemList.addAll(it)
-            notifyDataSetChanged()
+            mHandler.post {
+                _itemList.addAll(it)
+                notifyDataSetChanged()
+            }
         }
     }
 
     fun add(item: T?) {
         item?.let {
-            val position = _itemList.size
-            _itemList.add(position, it)
-            notifyItemInserted(position)
+            mHandler.post {
+                val position = _itemList.size
+                _itemList.add(position, it)
+                notifyItemInserted(position)
+            }
         }
     }
 
@@ -70,8 +79,10 @@ abstract class BaseAdapter<T>(@LayoutRes val layoutId: Int, listener: OnItemClic
         if (position < 0)
             return
 
-        _itemList.removeAt(position)
-        notifyItemRemoved(position)
+        mHandler.post {
+            _itemList.removeAt(position)
+            notifyItemRemoved(position)
+        }
     }
 
     fun remove(item: T?) {
@@ -81,9 +92,11 @@ abstract class BaseAdapter<T>(@LayoutRes val layoutId: Int, listener: OnItemClic
             if (position < 0)
                 return
 
-            if (_itemList.contains(it)) _itemList.remove(it)
+            mHandler.post {
+                if (_itemList.contains(it)) _itemList.remove(it)
 
-            notifyItemRemoved(position)
+                notifyItemRemoved(position)
+            }
         }
     }
 
@@ -99,6 +112,9 @@ abstract class BaseAdapter<T>(@LayoutRes val layoutId: Int, listener: OnItemClic
     }
 
     fun clear() {
-        _itemList.clear()
+        mHandler.post {
+            _itemList.clear()
+            notifyDataSetChanged()
+        }
     }
 }
