@@ -103,7 +103,7 @@ class RetrofitLogInterceptor constructor() : Interceptor {
                     + bodySize + " body") else "") + ')'
         )
         if (logHeaders) {
-            if (GLog.isRequestHeaderLog) {
+            if (GLog.isResponseHeaderLog) {
                 val headers = response.headers()
                 var i = 0
                 val count = headers.size()
@@ -148,7 +148,7 @@ class RetrofitLogInterceptor constructor() : Interceptor {
                 if (contentLength != 0L) {
                     if (isResponseBodyShow) {
                         GLog.d("========================== BODY START==========================")
-                        GLog.d(buffer.clone().readString(charset))
+                        GLog.d(GLog.getPretty(buffer.clone().readString(charset)))
                         GLog.d("========================== BODY END ==========================")
                     }
                 }
