@@ -46,7 +46,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         binding.btnQr.setOnSingleClickListener {
             GLog.i("qr button onClick")
-            onScanButtonClick()
+            intent = Intent(mActivity, QRActivity::class.java)
+            startActivity(intent)
         }
     }
 
