@@ -1,6 +1,7 @@
 package com.example.kotlintemplate.ui.activity
 
 import android.content.Intent
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.kotlintemplate.R
 import com.example.kotlintemplate.base.BaseActivity
@@ -12,12 +13,21 @@ import com.example.kotlintemplate.network.model.singlePhoto.SinglePhotoModel
 import com.example.kotlintemplate.network.retrofit.ApiManager
 import com.example.kotlintemplate.util.GLog
 import com.example.kotlintemplate.viewmodel.CustomListViewModel
+import com.journeyapps.barcodescanner.ScanContract
+import com.journeyapps.barcodescanner.ScanOptions
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private lateinit var customListViewModel: CustomListViewModel
+    private val mBarCodeLauncher = registerForActivityResult(ScanContract()) { result ->
+        if (result.contents == null) {
+            Toast.makeText(mActivity, "Cancelled", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(mActivity, "Scanned : " + result.contents, Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun init() {
         initView()
@@ -32,6 +42,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         binding.btnRetrofit.setOnSingleClickListener {
             requestApi()
+        }
+
+        binding.btnQr.setOnSingleClickListener {
+            GLog.i("qr button onClick")
+            onScanButtonClick()
         }
     }
 
@@ -55,9 +70,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         }
     }
 
+    private fun onScanButtonClick() {
+        mBarCodeLauncher.launch(ScanOptions())
+    }
+
     private fun requestApi() {
         ApiManager.requestSinglePhoto().enqueue(object : Callback<SinglePhotoModel> {
-            override fun onResponse(call: Call<SinglePhotoModel>, response: Response<SinglePhotoModel>) {
+            override fun onResponse(
+                call: Call<SinglePhotoModel>,
+                response: Response<SinglePhotoModel>
+            ) {
                 if (response.isSuccessful) {
                     val model: SinglePhotoModel? = response.body()
                     model?.let {
