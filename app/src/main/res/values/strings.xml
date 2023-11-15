@@ -2,4 +2,7 @@
     <string name="app_name">KotlinTest</string>
 
     <string name="msg_play_data_title_desc"><![CDATA[게임별 <font color=\'#2BB7B3\'>플레이타임</font>을 확인해보세요.<br>※ 전체 게임 이용시간은 <font color=\'#2BB7B3\'>2021년 12월 24일 00시</font> 이후부터 누적된 시간입니다.]]></string>
+
+    <string name="label_ok">OK</string>
+    <string name="label_cancel">CANCEL</string>
 </resources>

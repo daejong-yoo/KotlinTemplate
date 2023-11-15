@@ -16,10 +16,18 @@
         tools:context=".ui.activity.MainActivity">
 
         <Button
+            android:id="@+id/btn_dialog"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="dialog"
+            app:layout_constraintLeft_toLeftOf="@+id/btn_qr"
+            app:layout_constraintRight_toRightOf="@+id/btn_qr"
+            app:layout_constraintBottom_toTopOf="@+id/btn_qr" />
+
+        <Button
             android:id="@+id/btn_qr"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:text="QR 스캔"
             app:layout_constraintBottom_toTopOf="@+id/btn_to_fragment"
             app:layout_constraintLeft_toLeftOf="@+id/btn_to_fragment"

@@ -7,6 +7,7 @@ import com.example.kotlintemplate.R
 import com.example.kotlintemplate.base.BaseActivity
 import com.example.kotlintemplate.common.Constant
 import com.example.kotlintemplate.databinding.ActivityMainBinding
+import com.example.kotlintemplate.dialog.MessageDialog
 import com.example.kotlintemplate.extension.setOnSingleClickListener
 import com.example.kotlintemplate.network.model.singlePhoto.CustomList
 import com.example.kotlintemplate.network.model.singlePhoto.SinglePhotoModel
@@ -20,7 +21,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
-    private lateinit var customListViewModel: CustomListViewModel
+    private val customListViewModel: CustomListViewModel by lazy { ViewModelProvider(this)[CustomListViewModel::class.java] }
     private val mBarCodeLauncher = registerForActivityResult(ScanContract()) { result ->
         if (result.contents == null) {
             Toast.makeText(mActivity, "Cancelled", Toast.LENGTH_SHORT).show()
@@ -49,10 +50,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             intent = Intent(mActivity, QRActivity::class.java)
             startActivity(intent)
         }
+
+        binding.btnDialog.setOnSingleClickListener {
+            GLog.i("dialog button onClick")
+            MessageDialog(mActivity).show()
+        }
     }
 
     private fun initViewModel() {
-        customListViewModel = ViewModelProvider(this)[CustomListViewModel::class.java]
         binding.vm = customListViewModel
     }
 
