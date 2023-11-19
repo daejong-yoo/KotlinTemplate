@@ -29,14 +29,23 @@
 
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             tools:replace="screenOrientation" />
 
         <activity
             android:name=".ui.activity.QRActivity"
+            android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             tools:replace="screenOrientation" />
+
+        <activity
+            android:name=".ui.activity.RoomActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
 
     </application>
 

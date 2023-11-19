@@ -1,13 +1,14 @@
 package com.example.kotlintemplate.ui.activity
 
 import android.content.Intent
+import android.content.res.Configuration
+import android.os.Build
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.kotlintemplate.R
 import com.example.kotlintemplate.base.BaseActivity
 import com.example.kotlintemplate.common.Constant
 import com.example.kotlintemplate.databinding.ActivityMainBinding
-import com.example.kotlintemplate.dialog.MessageDialog
 import com.example.kotlintemplate.extension.setOnSingleClickListener
 import com.example.kotlintemplate.network.model.singlePhoto.CustomList
 import com.example.kotlintemplate.network.model.singlePhoto.SinglePhotoModel
@@ -19,6 +20,7 @@ import com.journeyapps.barcodescanner.ScanOptions
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Locale
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val customListViewModel: CustomListViewModel by lazy { ViewModelProvider(this)[CustomListViewModel::class.java] }
@@ -53,7 +55,27 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         binding.btnDialog.setOnSingleClickListener {
             GLog.i("dialog button onClick")
-            MessageDialog(mActivity).show()
+//            MessageDialog(mActivity).show()
+            val configuration = Configuration(resources.configuration)
+            configuration.setLocale(Locale(Locale.US.toString()))
+
+            intent = baseContext.packageManager.getLaunchIntentForPackage(baseContext.packageName)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            finish()
+        }
+
+        binding.btnToRoom.setOnSingleClickListener {
+            intent = Intent(mActivity, RoomActivity::class.java)
+            startActivity(intent)
+        }
+
+        GLog.d("language : ${Locale.getISOLanguages()}")
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            GLog.d("language 2 : ${resources.configuration.locales[0].language}")
+            GLog.d("language size :${resources.configuration.locales.size()}")
         }
     }
 

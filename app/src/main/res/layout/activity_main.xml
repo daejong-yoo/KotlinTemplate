@@ -16,6 +16,16 @@
         tools:context=".ui.activity.MainActivity">
 
         <Button
+            android:id="@+id/btn_to_room"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Room 이동"
+            android:textAllCaps="false"
+            app:layout_constraintLeft_toLeftOf="@+id/btn_dialog"
+            app:layout_constraintRight_toRightOf="@+id/btn_dialog"
+            app:layout_constraintBottom_toTopOf="@+id/btn_dialog" />
+
+        <Button
             android:id="@+id/btn_dialog"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -37,7 +47,6 @@
             android:id="@+id/btn_to_fragment"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:text="Fragment 이동"
             android:textAllCaps="false"
             app:layout_constraintBottom_toTopOf="@+id/btn_retrofit"

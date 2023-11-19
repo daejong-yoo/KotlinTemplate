@@ -1,8 +1,8 @@
 plugins {
     id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'org.jetbrains.kotlin.kapt'
+    id 'kotlin-android'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -54,6 +54,11 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.15.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1'
+
+    // room 관련
+    implementation "androidx.room:room-runtime:2.2.6"
+    kapt 'androidx.room:room-compiler:2.2.6'
+
 
     //QR Code 관련
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
