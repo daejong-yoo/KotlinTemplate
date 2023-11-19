@@ -28,6 +28,18 @@
         <activity android:name="com.example.kotlintemplate.ui.activity.HostFragActivity" />
 
         <activity
+            android:name=".ui.activity.home.HomeActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.activity.error.ErrorActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:exported="false"
             android:launchMode="singleTop"

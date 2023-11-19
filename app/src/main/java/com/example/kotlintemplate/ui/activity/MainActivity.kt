@@ -13,6 +13,7 @@ import com.example.kotlintemplate.extension.setOnSingleClickListener
 import com.example.kotlintemplate.network.model.singlePhoto.CustomList
 import com.example.kotlintemplate.network.model.singlePhoto.SinglePhotoModel
 import com.example.kotlintemplate.network.retrofit.ApiManager
+import com.example.kotlintemplate.ui.activity.home.HomeActivity
 import com.example.kotlintemplate.util.GLog
 import com.example.kotlintemplate.viewmodel.CustomListViewModel
 import com.journeyapps.barcodescanner.ScanContract
@@ -38,6 +39,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun initView() {
+        binding.btnToHome.setOnSingleClickListener {
+            intent = Intent(mActivity, HomeActivity::class.java)
+            startActivity(intent)
+        }
         binding.btnToFragment.setOnSingleClickListener {
             intent = Intent(mActivity, HostFragActivity::class.java)
             startActivity(intent)
