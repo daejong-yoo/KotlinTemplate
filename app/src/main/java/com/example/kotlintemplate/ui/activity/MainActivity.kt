@@ -1,14 +1,15 @@
 package com.example.kotlintemplate.ui.activity
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Build
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.kotlintemplate.R
 import com.example.kotlintemplate.base.BaseActivity
 import com.example.kotlintemplate.common.Constant
+import com.example.kotlintemplate.common.OnSingleClickListener
 import com.example.kotlintemplate.databinding.ActivityMainBinding
+import com.example.kotlintemplate.dialog.MessageDialog
 import com.example.kotlintemplate.extension.setOnSingleClickListener
 import com.example.kotlintemplate.network.model.singlePhoto.CustomList
 import com.example.kotlintemplate.network.model.singlePhoto.SinglePhotoModel
@@ -18,6 +19,9 @@ import com.example.kotlintemplate.util.GLog
 import com.example.kotlintemplate.viewmodel.CustomListViewModel
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -60,15 +64,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         binding.btnDialog.setOnSingleClickListener {
             GLog.i("dialog button onClick")
-//            MessageDialog(mActivity).show()
-            val configuration = Configuration(resources.configuration)
-            configuration.setLocale(Locale(Locale.US.toString()))
+            CoroutineScope(Dispatchers.Main).launch {
+                MessageDialog(mActivity, OnSingleClickListener {
 
-            intent = baseContext.packageManager.getLaunchIntentForPackage(baseContext.packageName)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-            finish()
+                }).show()
+            }
         }
 
         binding.btnToRoom.setOnSingleClickListener {
@@ -128,6 +128,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                                     GLog.e("data is null")
                                 }
                             }
+
                             else -> {
                                 GLog.e("실패 : $errMsg")
                             }
