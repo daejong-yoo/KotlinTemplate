@@ -56,12 +56,16 @@ class GLog {
             return if (isLogPrint) gson.toJson(src) else ""
         }
 
-        fun getPretty(jsonString: String): String {
+        fun getPretty(jsonString: String?): String {
+            if (jsonString.isNullOrEmpty()) {
+                e("jsonString is null")
+                return ""
+            }
             val INDENT = "    "
             val prettyJsonSb = StringBuffer()
             var indentDepth = 0
-            var targetString: String? = null
-            for (i in 0 until jsonString.length) {
+            var targetString: String?
+            for (i in jsonString.indices) {
                 targetString = jsonString.substring(i, i + 1)
                 when (targetString) {
                     "{", "[" -> {
@@ -71,6 +75,7 @@ class GLog {
                             prettyJsonSb.append(INDENT)
                         }
                     }
+
                     "}", "]" -> {
                         prettyJsonSb.append("\n")
                         indentDepth--
@@ -79,6 +84,7 @@ class GLog {
                         }
                         prettyJsonSb.append(targetString)
                     }
+
                     "," -> {
                         prettyJsonSb.append(targetString)
                         prettyJsonSb.append("\n")
@@ -86,6 +92,7 @@ class GLog {
                             prettyJsonSb.append(INDENT)
                         }
                     }
+
                     else -> {
                         prettyJsonSb.append(targetString)
                     }
@@ -147,7 +154,8 @@ class GLog {
                         LOG_ERROR -> Log.e(TAG, theMsg)
                     }
                 }
-            } catch (e: OutOfMemoryError) {
+            } catch (e: Exception) {
+                e("dLong exception : ${e.message}")
                 if (isLogPrint) e.printStackTrace()
             }
         }
