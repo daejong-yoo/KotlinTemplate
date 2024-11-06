@@ -1,6 +1,7 @@
 package com.example.kotlintemplate.ui.activity
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.lifecycle.ViewModelProvider
 import com.example.kotlintemplate.R
 import com.example.kotlintemplate.base.BaseActivity
@@ -25,6 +26,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun initView() {
+        window.statusBarColor = Color.TRANSPARENT
+
         binding.btnToFragment.setOnSingleClickListener {
             intent = Intent(mActivity, HostFragActivity::class.java)
             startActivity(intent)
