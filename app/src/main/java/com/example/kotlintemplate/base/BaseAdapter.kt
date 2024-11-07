@@ -13,7 +13,7 @@ import com.example.kotlintemplate.common.OnItemClickListener
 import com.example.kotlintemplate.util.GLog
 
 abstract class BaseAdapter<T>(@LayoutRes val layoutId: Int, listener: OnItemClickListener) : RecyclerView.Adapter<BaseAdapter<T>.ViewHolder>() {
-    private val mHandler = Handler(Looper.myLooper()!!)
+    private val mHandler = Handler(Looper.getMainLooper())
     private val _itemList: MutableList<T> = mutableListOf()
     private var mListener: OnItemClickListener
 
