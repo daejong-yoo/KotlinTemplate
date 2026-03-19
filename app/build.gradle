@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace 'com.example.kotlintemplate'
-    compileSdk 33
+    compileSdk 34
 
     dataBinding {
         enabled = true
